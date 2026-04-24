@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor P as Гравець
+    participant GS as :GameSession
+    participant Q as :Question
+    participant R as :Result
+
+    P->>GS: submitAnswer(answerIndex, time)
+    activate GS
+    GS->>Q: validateAnswer(answerIndex)
+    activate Q
+    Q-->>GS: isCorrect: bool
+    deactivate Q
+    
+    alt isCorrect == true
+        GS->>R: calculatePoints(time)
+        activate R
+        R-->>GS: scoreEarned
+        deactivate R
+    else isCorrect == false
+        GS-->>GS: score = 0
+    end
+    
+    GS-->>P: displayFeedback(score)
+    deactivate GS
