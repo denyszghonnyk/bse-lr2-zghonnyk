@@ -1,15 +1,15 @@
-useCaseDiagram
-    actor Player as "Гравець"
-    actor Host as "Організатор"
+graph LR
+    Player((Гравець))
+    Host((Організатор))
 
-    package "E-Kahoot" {
-        usecase UC01 as "Створити вікторину"
-        usecase UC02 as "Керувати ігровою кімнатою"
-        usecase UC03 as "Приєднатися за кодом"
-        usecase UC04 as "Відповісти на питання"
-        usecase UC05 as "Переглянути таблицю лідерів"
-        usecase UC06 as "Автентифікація"
-    }
+    subgraph "Система E-Kahoot"
+        UC01(Створити вікторину)
+        UC02(Керувати ігровою кімнатою)
+        UC03(Приєднатися за кодом)
+        UC04(Відповісти на питання)
+        UC05(Переглянути таблицю лідерів)
+        UC06(Автентифікація)
+    end
 
     Host --> UC01
     Host --> UC02
@@ -17,8 +17,7 @@ useCaseDiagram
     Player --> UC04
     Player --> UC05
 
-    UC01 ..> UC06 : <<include>>
-    UC02 ..> UC06 : <<include>>
-    UC03 ..> UC06 : <<include>>
-
-    UC04 ..> UC05 : <<extend>>
+    UC01 -.->|include| UC06
+    UC02 -.->|include| UC06
+    UC03 -.->|include| UC06
+    UC04 -.->|extend| UC05
