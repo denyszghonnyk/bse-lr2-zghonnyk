@@ -1,0 +1,24 @@
+useCaseDiagram
+    actor Player as "Гравець"
+    actor Host as "Організатор"
+
+    package "E-Kahoot" {
+        usecase UC01 as "Створити вікторину"
+        usecase UC02 as "Керувати ігровою кімнатою"
+        usecase UC03 as "Приєднатися за кодом"
+        usecase UC04 as "Відповісти на питання"
+        usecase UC05 as "Переглянути таблицю лідерів"
+        usecase UC06 as "Автентифікація"
+    }
+
+    Host --> UC01
+    Host --> UC02
+    Player --> UC03
+    Player --> UC04
+    Player --> UC05
+
+    UC01 ..> UC06 : <<include>>
+    UC02 ..> UC06 : <<include>>
+    UC03 ..> UC06 : <<include>>
+
+    UC04 ..> UC05 : <<extend>>
